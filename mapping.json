@@ -1,0 +1,141 @@
+{
+  "frontend/src/App.js": {
+    "description": "Main component that sets up routing and renders the application.",
+    "imports": [
+      "import React from 'react';",
+      "import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';",
+      "import HomePage from './pages/HomePage';",
+      "import LoginPage from './pages/LoginPage';",
+      "import RegisterPage from './pages/RegisterPage';"
+    ],
+    "methods/functions": [
+      "function App()",
+      "return ( <Router> <Switch> <Route path='/' component={HomePage} /> </Switch> </Router> );"
+    ]
+  },
+  "frontend/src/index.js": {
+    "description": "Entry point for the React application. Renders the App component.",
+    "imports": [
+      "import React from 'react';",
+      "import ReactDOM from 'react-dom';",
+      "import './index.css';",
+      "import App from './App';",
+      "import reportWebVitals from './reportWebVitals';"
+    ],
+    "methods/functions": [
+      "ReactDOM.render(<React.StrictMode><App /></React.StrictMode>, document.getElementById('root'));",
+      "reportWebVitals();"
+    ]
+  },
+  "frontend/src/index.css": {
+    "description": "Global CSS styles for the application.",
+    "imports": [],
+    "methods/functions": []
+  },
+  "frontend/src/App.css": {
+    "description": "CSS styles specifically for the App component.",
+    "imports": [],
+    "methods/functions": []
+  },
+  "frontend/src/reportWebVitals.js": {
+    "description": "Helper file to measure performance metrics in the application.",
+    "imports": [
+      "import { report } from 'web-vitals';"
+    ],
+    "methods/functions": [
+      "function reportWebVitals(onPerfEntry) { if (onPerfEntry && onPerfEntry instanceof Function) { import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => { getCLS(onPerfEntry); getFID(onPerfEntry); getFCP(onPerfEntry); getLCP(onPerfEntry); getTTFB(onPerfEntry); }); }}"
+    ]
+  },
+  "frontend/src/setupTests.js": {
+    "description": "Sets up the testing environment before each test.",
+    "imports": [
+      "import '@testing-library/jest-dom/extend-expect';"
+    ],
+    "methods/functions": []
+  },
+  "frontend/package.json": {
+    "description": "Contains the list of dependencies and their versions for the frontend.",
+    "modules": {
+      "@emotion/react": "^11.11.1",
+      "@emotion/styled": "^11.11.0",
+      "@mui/material": "^5.13.7",
+      "axios": "^1.4.0",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-router-dom": "^6.14.0",
+      "react-scripts": "5.0.1",
+      "web-vitals": "^2.1.4"
+    }
+  },
+  "backend/server.js": {
+    "description": "Entry point for the backend server. Sets up and starts the Express server.",
+    "imports": [
+      "import express from 'express';",
+      "import dotenv from 'dotenv';",
+      "import connectDB from './config/db.js';",
+      "import authRouter from './routes/auth.js';"
+    ],
+    "methods/functions": [
+      "dotenv.config()",
+      "connectDB()",
+      "app.use('/api/auth', authRouter);",
+      "app.listen(PORT, () => console.log(`Server running on port ${PORT}`));"
+    ]
+  },
+  "backend/config/db.js": {
+    "description": "Configuration file for connecting to MongoDB using Mongoose.",
+    "imports": [
+      "import mongoose from 'mongoose';"
+    ],
+    "methods/functions": [
+      "mongoose.connect"
+    ]
+  },
+  "backend/controllers/authController.js": {
+    "description": "Controller handling authentication logic (register, login, logout).",
+    "imports": [
+      "import User from '../models/User.js';",
+      "import bcrypt from 'bcryptjs';",
+      "import jwt from 'jsonwebtoken';"
+    ],
+    "methods/functions": [
+      "register",
+      "login",
+      "logout"
+    ]
+  },
+  "backend/models/User.js": {
+    "description": "Mongoose model for the User schema, representing users in the application.",
+    "imports": [
+      "import mongoose from 'mongoose';",
+      "import bcrypt from 'bcryptjs';"
+    ],
+    "methods/functions": [
+      "UserSchema.pre('save', function",
+      "UserSchema.methods.matchPassword",
+      "UserSchema.methods.generateAuthToken"
+    ]
+  },
+  "backend/routes/auth.js": {
+    "description": "Router for authentication-related routes (e.g., register, login, logout).",
+    "imports": [
+      "import express from 'express';",
+      "import { register, login, logout } from '../controllers/authController.js';"
+    ],
+    "methods/functions": [
+      "router.post('/register', register);",
+      "router.post('/login', login);",
+      "router.get('/logout', logout);"
+    ]
+  },
+  "backend/package.json": {
+    "description": "Contains the list of dependencies and their versions for the backend.",
+    "modules": {
+      "bcryptjs": "^2.4.3",
+      "cors": "^2.8.5",
+      "express": "^4.19.2",
+      "jsonwebtoken": "^9.0.2",
+      "mongoose": "^8.5.3"
+    }
+  }
+}
